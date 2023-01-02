@@ -26,3 +26,23 @@
 .post {
   border-radius: 10px;
 }
+
+.signUp {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.3rem;
+}
+.signUp img {
+  margin-bottom: 2rem;
+}
+.signUp input {
+  width: 300px;
+}
+.signUp button {
+  background-color: rgb(93, 237, 49);
+  font-weight: 600;
+  color: rgb(0, 0, 0);
+  margin-top: 2rem;
+}
