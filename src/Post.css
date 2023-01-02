@@ -1,0 +1,26 @@
+.post {
+    max-width: 500px;
+    border: 1px solid lightgray;
+    margin-bottom: 45px;
+}
+.post__avatar {
+    transform: scale(0.88);
+}
+.post__image {
+    width: 100%;
+    object-fit: contain;
+}
+
+.post__text {
+    font-weight: normal;
+    padding: 1rem;
+}
+
+.post__header {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+    align-items: center;
+    padding-left: 1rem;
+    padding-block: 6px;
+}
