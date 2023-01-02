@@ -5,6 +5,7 @@ import { db, auth } from './firebase'
 import Modal from '@mui/material/Modal';
 import { Button, Input } from '@material-ui/core';
 import Box from '@mui/material/Box';
+import ImageUpload from './ImageUpload';
 
 
 
@@ -52,7 +53,7 @@ function App() {
   }, [user, username]);
 
   useEffect(() => {
-    db.collection('posts').onSnapshot(snapshot => {
+    db.collection('posts').orderBy('timestamp','desc').onSnapshot(snapshot => {
       setPosts(snapshot.docs.map(doc => ({
         id: doc.id,
         post: doc.data()
@@ -83,6 +84,11 @@ function App() {
 
   return (
     <div className="app">
+      {user?.displayName ? (
+        <ImageUpload username={user.displayName} />
+      ):
+      (<h3></h3>)
+      }
       <Modal
         open={open}
         onClose={() => setOpen(false)}
@@ -152,19 +158,22 @@ function App() {
 
       <div className="app__header">
         <img className='app__headerImage' src="https://logos-download.com/wp-content/uploads/2016/03/Instagram_Logo_2016-700x199.png" alt="" />
-      </div>
-
-      {user ? (<Button onClick={() => auth.signOut()}>Logout</Button>)
+        {user ? (<Button className='signout' onClick={() => auth.signOut()}>Logout</Button>)
         :
         <div className="app__loginContainer">
-          <Button onClick={() => { setOpenSignIn(true) }}>Sign In</Button>
-          <Button onClick={() => { setOpen(true) }}>Sign Up</Button>
+          <Button className='signin' onClick={() => { setOpenSignIn(true) }}>Sign In</Button>
+          <Button className='signup' onClick={() => { setOpen(true) }}>Sign Up</Button>
         </div>
       }
+      </div>
+
+      
 
       {
         posts.map(({ id, post }) => (
+          <div className="post-flex">
           <Post key={id} username={post.username} caption={post.caption} imageUrl={post.imageUrl} />
+          </div>
         ))
       }
 
